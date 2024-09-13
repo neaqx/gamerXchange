@@ -1,16 +1,21 @@
-import { StrictMode } from 'react';
+import React from 'react';
 import { createRoot } from 'react-dom/client';
-import App from './App.tsx';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { CurrentUserProvider } from './context/CurrentUserContext.tsx'; 
+import { CurrentUserProvider } from './context/CurrentUserContext';
+import App from './App';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
+const rootElement = document.getElementById('root');
+if (!rootElement) throw new Error('Failed to find the root element');
+
+const root = createRoot(rootElement);
+
+root.render(
+  <React.StrictMode>
     <Router>
       <CurrentUserProvider>
         <App />
       </CurrentUserProvider>
     </Router>
-  </StrictMode>
+  </React.StrictMode>
 );
